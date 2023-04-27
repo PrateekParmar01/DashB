@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { FiShield, FiShoppingCart } from 'react-icons/fi';
 import { BsChatLeft } from 'react-icons/bs';
@@ -44,6 +44,8 @@ const Navbar = () => {
       setActiveMenu(true);
     }
   }, [screenSize]);
+  const [isHidden, setIsHidden] = useState(true);
+  const [isHidden1, setIsHidden1] = useState(true);
   
   return (
     <div className='flex justify-between p-2 md:mx-6 relative'>
@@ -70,6 +72,7 @@ const Navbar = () => {
       <NavButton 
       title="Notification" 
       dotColor="#03C9D7"
+      onClick={() => {handleClick('notification');setIsHidden(!isHidden)}}
       customFunc={()=>handleClick('notification')} 
       color={currentColor} 
       icon={<RiNotification3Line/>}/>  
@@ -77,7 +80,7 @@ const Navbar = () => {
         <TooltipComponent content="Profile" position="BottomCenter">
           <div
             className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
-            onClick={() => handleClick('userProfile')}
+            onClick={() => {handleClick('userProfile');setIsHidden(!isHidden)}}
           >
             <img
               className="rounded-full w-8 h-8"
@@ -97,6 +100,8 @@ const Navbar = () => {
         {isClicked.chat && <Chat/>}
         {isClicked.notification && <Notification/>}
         {isClicked.userProfile && <UserProfile/>}
+        {/* {<Notification isHidden={isHidden} setIsHidden={setIsHidden}/>} */}
+        {/* {!isHidden && <UserProfile isHidden={isHidden} setIsHidden={setIsHidden}/>} */}
       </div>
     </div>
 

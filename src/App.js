@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
-
-import { Navbar, Footer, Sidebar, ThemeSettings } from './components';
+import { useState } from 'react';
+import { Navbar, Footer, Sidebar, ThemeSettings, Notification } from './components';
 import { Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor } from './pages';
 import './App.css';
-
+import { UserProfile } from './components';
 import { useStateContext } from './contexts/ContextProvider';
 
 const App = () => {
@@ -20,6 +20,16 @@ const App = () => {
       setCurrentMode(currentThemeMode);
     }
   }, []);
+
+  const [notification, setNotification] = useState();
+
+  const handleShowSuccessNotification = () => {
+    setNotification({ message: 'Success!', type: 'success' });
+  };
+
+  const handleShowErrorNotification = () => {
+    setNotification({ message: 'Error!', type: 'error' });
+  };
 
   return (
     <div className={currentMode === 'Dark' ? 'dark' : ''}>
@@ -88,6 +98,8 @@ const App = () => {
                 <Route path="/color-mapping" element={<ColorMapping />} />
                 <Route path="/pyramid" element={<Pyramid />} />
                 <Route path="/stacked" element={<Stacked />} />
+
+                
 
               </Routes>
             </div>
